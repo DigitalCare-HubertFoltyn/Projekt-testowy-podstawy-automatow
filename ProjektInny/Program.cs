@@ -1,4 +1,4 @@
-﻿namespace ProjektDodatkowy
+﻿namespace ProjektInny
 {
     internal class Program
     {
@@ -7,6 +7,4 @@
             Console.WriteLine("Hello, World!");
         }
     }
-
-
 }

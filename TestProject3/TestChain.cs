@@ -23,6 +23,8 @@ namespace TestProject3
         {
             //this.TestContext = TestContext;
             a = 1;
+          
+
         }
         [TestCleanup]
         public void RunAfterEveryTestMethod()
