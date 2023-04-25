@@ -11,7 +11,7 @@ using System.Threading;
 namespace TestProject3
 {
     [TestClass]
-    public class UnitTest1
+    public class FunctionalTests
     {
         IWebDriver driver;
 
@@ -22,17 +22,16 @@ namespace TestProject3
             driver = new ChromeDriver();
             
             driver.Manage().Window.Maximize();
-            
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
 
         [TestCleanup()]
         public void Cleanup()
         {
             driver.Dispose();//zamyka wszystkie okna aktualnie otwarte przez WebDriver'a i bezpiecznie koñczy sesjê.
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //driver.Quit();
+            //driver.Close();// zamyka aktywne okno, ale sesja pozostaje aktywna.
         }
-
-
 
         [TestMethod]
         public void DriverLevelInterrogation()
@@ -53,9 +52,8 @@ namespace TestProject3
             var x = LinkElement.GetAttribute("href");
             var y = LinkElement.GetCssValue("margin");
             var z = LinkElement.TagName;
-
-
         }
+
         [TestMethod]
         public void WebElementAssertion()
         {
@@ -75,8 +73,6 @@ namespace TestProject3
             //Assert.AreEqual(500, LinkElement.Location.Y);
             Assert.IsTrue(z > x);
         }
-
-
 
         [TestMethod]
         public void TestWithSimpleSelectors()
@@ -110,8 +106,6 @@ namespace TestProject3
             Assert.AreEqual("Thanks for contacting us", ThankYouMessage);
         }
 
-
-
         [TestMethod]
         public void BrokenTestWithXPATHSelectors()
         {
@@ -143,7 +137,6 @@ namespace TestProject3
             string ThankYouMessage = ContactMessage.Text;
             Assert.AreEqual("Thanks for contacting us", ThankYouMessage);
         }
-
 
         [TestMethod]
         public void SimpleSelectorTest()
@@ -181,6 +174,20 @@ namespace TestProject3
             IWebElement classElement = driver.FindElement(By.ClassName("testClass"));
             string pragraphText = classElement.Text;
             Assert.AreEqual("This is a paragraph with text that belongs to a class.", pragraphText);
+        }
+
+        [DataTestMethod]
+        [DataRow(4, "Apple", "Insurance", 10.15)]
+        [DataRow(4, "Apple", "Insurance", 10.15)]
+        [DataRow(5, "Apple", "Insurance", 10.13)]
+        [DataRow(3, "Apple", "Insurance", 10.15)]
+        [TestMethod]
+        [TestCategory("TestyRegresyjne")]
+        public void TotalPriceTest(int amountOfDevices, string manufacturerName, string productType, double price)
+        {
+            var totalPrice = price * amountOfDevices;
+            var ExpectedTotalPrice = 40.6;
+            Assert.IsTrue(ExpectedTotalPrice == totalPrice);
         }
 
         private int GetCaptchaResult(IWebElement captcha)

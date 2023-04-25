@@ -9,14 +9,11 @@ using System.Threading.Tasks;
 namespace TestProject3
 {
     [TestClass]
-    internal class TestChain
+    public class TestChain
     {
         private int a;
         public TestContext TestContext { get; set; }
         private static TestContext _testContext;
-
-
-
 
         [TestInitialize]
         public void RunBeforeEveryTest()
@@ -45,6 +42,7 @@ namespace TestProject3
 
         //use the test context like this, not through the static property as I showed in my videos
         [TestMethod]
+        [TestCategory("TestyRegresyjne")]
         public void TestMethod2()
         {
             //Use it using TestContext instead of _testContext
@@ -52,7 +50,15 @@ namespace TestProject3
             Assert.IsTrue(a == 1);
         }
 
-
+        [TestMethod]
+        [TestCategory("TestyRegresyjne")]
+        public void TestMethod3()
+        {
+            //Use it using TestContext instead of _testContext
+            Trace.Write(TestContext.TestName);
+            Assert.IsTrue(a == 1);
+        }
+   
 
 
     }
