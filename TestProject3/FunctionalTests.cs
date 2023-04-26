@@ -39,9 +39,16 @@ namespace TestProject3
             driver.Navigate().GoToUrl("https://ultimateqa.com/automation/");
             var currentWindow = driver.CurrentWindowHandle; // TODO: Dodaæ Asercje na koñcu testu
             var windows = driver.WindowHandles;
-            var pageSourse = driver.PageSource;
+            var pageSource = driver.PageSource;
             var title = driver.Title;
             var url = driver.Url;
+
+
+            //((IJavaScriptExecutor)driver).ExecuteScript("window.open();");
+            //windows = driver.WindowHandles;
+            //driver.SwitchTo().Window(windows[1]);
+            //driver.Navigate().GoToUrl("https://testing.todorvachev.com");
+            //Thread.Sleep(2000);
         }
 
         [TestMethod]
@@ -52,6 +59,7 @@ namespace TestProject3
             var x = LinkElement.GetAttribute("href");
             var y = LinkElement.GetCssValue("margin");
             var z = LinkElement.TagName;
+      
         }
 
         [TestMethod]
